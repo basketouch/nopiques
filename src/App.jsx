@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AnalyzerForm } from './components/AnalyzerForm'
 import { Header } from './components/Header'
@@ -216,7 +216,27 @@ function App() {
   const [verifications, setVerifications] = useState(0)
   const [openFAQ, setOpenFAQ] = useState(null)
 
-  const handleVerification = () => {
+  // Al cargar, leemos el contador global del servidor
+  useEffect(() => {
+    fetch('/api/stats')
+      .then(r => r.json())
+      .then(d => { if (typeof d.count === 'number') setVerifications(d.count) })
+      .catch(() => {})
+  }, [])
+
+  // Tras cada verificación, sumamos en el servidor (global). Si no está
+  // configurada la base de datos aún, hacemos un conteo local de respaldo.
+  const handleVerification = async () => {
+    try {
+      const r = await fetch('/api/stats', { method: 'POST' })
+      const d = await r.json()
+      if (typeof d.count === 'number') {
+        setVerifications(d.count)
+        return
+      }
+    } catch {
+      // ignoramos y usamos el respaldo local
+    }
     setVerifications(prev => prev + 1)
   }
 
