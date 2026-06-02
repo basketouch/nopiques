@@ -1,4 +1,15 @@
 export default async function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version')
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
@@ -12,7 +23,8 @@ export default async function handler(req, res) {
   try {
     const apiKey = process.env.CLAUDE_API_KEY
     if (!apiKey) {
-      return res.status(500).json({ error: 'API key not configured' })
+      console.error('CLAUDE_API_KEY not set')
+      return res.status(500).json({ error: 'Claude API key not configured' })
     }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -47,7 +59,7 @@ Mensaje: "${text}"`
     const content = data.content[0].text
     const result = JSON.parse(content)
 
-    return res.status(200).json({
+    return res.json({
       riskLevel: result.riskLevel,
       title: result.title,
       emoji: result.riskLevel === 'safe' ? '✓' : result.riskLevel === 'warning' ? '!' : '✕',
@@ -57,7 +69,7 @@ Mensaje: "${text}"`
         : 'No hagas clic en enlaces ni compartas datos. Denuncia como spam.'
     })
   } catch (error) {
-    console.error('Error:', error)
+    console.error('analyze-text error:', error)
     return res.status(500).json({
       riskLevel: 'warning',
       title: '! Error en análisis',
