@@ -1,109 +1,70 @@
-import { Anthropic } from '@anthropic-ai/sdk';
-
-function detectRedFlags(text) {
-  const redFlags = {
-    urgency: /urgente|ahora|inmediato|rápido|no esperes|pronto|hoy/gi,
-    threats: /bloqueado|suspendido|cancelado|desactivado|cerrado|restringido/gi,
-    clickBait: /hacer clic|pulsa aquí|verifica|confirma|actualiza|válida/gi,
-    moneyRelated: /pago|dinero|tarjeta|banco|cuenta|transferencia|multa|deuda|pagar/gi,
-    personalData: /contraseña|clave|usuario|email|teléfono|dni|datos personales/gi,
-    fakeAuthority: /banco|policía|hacienda|seguridad social|google|apple|amazon|microsoft/gi,
-  };
-
-  const flags = {};
-  for (const [key, regex] of Object.entries(redFlags)) {
-    flags[key] = (text.match(regex) || []).length;
-  }
-
-  return flags;
-}
-
-async function analyzeWithClaude(text, detectedFlags) {
-  const apiKey = process.env.VITE_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    throw new Error('ANTHROPIC_API_KEY not configured');
-  }
-
-  const anthropic = new Anthropic({ apiKey });
-
-  const prompt = `
-Eres un asistente amigable que ayuda a detectar estafas por SMS, email o mensajes.
-
-MENSAJE A ANALIZAR:
-"${text}"
-
-SEÑALES DETECTADAS:
-${JSON.stringify(detectedFlags, null, 2)}
-
-IMPORTANTE:
-- Responde SIEMPRE en español
-- Usa lenguaje simple, sin tecnicismos
-- Explica como lo harías a una persona mayor
-- NO hagas afirmaciones absolutas
-- Identifica las tácticas de manipulación (urgencia, miedo, presión)
-- Sé tranquilizador pero honesto
-
-ESTRUCTURA DE RESPUESTA:
-1. Nivel de riesgo: "✅ Parece seguro" | "⚠️ Hay señales sospechosas" | "⛔ Probablemente es una estafa"
-2. Explicación breve (2-3 frases máximo)
-3. Qué hacer: un consejo práctico
-
-Responde en JSON:
-{
-  "riskLevel": "safe" | "warning" | "danger",
-  "emoji": "✅" | "⚠️" | "⛔",
-  "title": "string",
-  "explanation": "string",
-  "advice": "string"
-}
-`;
-
-  const message = await anthropic.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 300,
-    messages: [{ role: 'user', content: prompt }],
-  });
-
-  try {
-    const content = message.content[0].text;
-    const jsonMatch = content.match(/\{[\s\S]*\}/);
-    return JSON.parse(jsonMatch ? jsonMatch[0] : content);
-  } catch (error) {
-    console.error('Parse error:', error);
-    return {
-      riskLevel: 'unknown',
-      emoji: '❓',
-      title: 'No se pudo analizar',
-      explanation: 'Hubo un error al procesar el mensaje.',
-      advice: 'Intenta de nuevo más tarde.',
-    };
-  }
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { text } = req.body;
+  const { text } = req.body
 
-  if (!text || typeof text !== 'string') {
-    return res.status(400).json({ error: 'Text is required' });
+  if (!text) {
+    return res.status(400).json({ error: 'Text required' })
   }
 
   try {
-    const detectedFlags = detectRedFlags(text);
-    const analysis = await analyzeWithClaude(text, detectedFlags);
+    const apiKey = process.env.CLAUDE_API_KEY
+    if (!apiKey) {
+      return res.status(500).json({ error: 'API key not configured' })
+    }
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 200,
+        messages: [
+          {
+            role: 'user',
+            content: `Analiza este mensaje SMS para detectar si es una estafa o phishing. 
+Responde SOLO en formato JSON (sin markdown, sin explicaciones):
+{"riskLevel": "safe|warning|danger", "title": "...", "explanation": "..."}
+
+Mensaje: "${text}"`
+          }
+        ]
+      })
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.error?.message || 'API error')
+    }
+
+    const content = data.content[0].text
+    const result = JSON.parse(content)
 
     return res.status(200).json({
-      ...analysis,
-      flags: detectedFlags,
-    });
+      riskLevel: result.riskLevel,
+      title: result.title,
+      emoji: result.riskLevel === 'safe' ? '✓' : result.riskLevel === 'warning' ? '!' : '✕',
+      explanation: result.explanation,
+      advice: result.riskLevel === 'safe' 
+        ? 'Parece un mensaje legítimo, pero verifica siempre antes de compartir datos.'
+        : 'No hagas clic en enlaces ni compartas datos. Denuncia como spam.'
+    })
   } catch (error) {
-    console.error('API error:', error);
+    console.error('Error:', error)
     return res.status(500).json({
-      error: 'Error al analizar el texto',
-      riskLevel: 'unknown',
-    });
+      riskLevel: 'warning',
+      title: '! Error en análisis',
+      emoji: '!',
+      explanation: 'No pudimos analizar este mensaje. Intenta de nuevo.',
+      advice: 'Si el problema persiste, contacta a jorge@insidelife.club',
+      error: error.message
+    })
   }
 }
