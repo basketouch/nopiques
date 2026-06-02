@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   if (!url) return res.status(400).json({ error: 'URL required' })
 
   try {
-    const apiKey = process.env.GOOGLE_SAFE_BROWSING_API_KEY
+    const apiKey = (process.env.GOOGLE_SAFE_BROWSING_API_KEY || '').trim()
     if (!apiKey) {
       return res.status(500).json({ error: 'Google API key not configured' })
     }

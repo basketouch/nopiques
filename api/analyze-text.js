@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   if (!text) return res.status(400).json({ error: 'Text required' })
 
   try {
-    const apiKey = process.env.ANTHROPIC_API_KEY
+    const apiKey = (process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY || '').trim()
     if (!apiKey) {
       return res.status(500).json({ error: 'API key not configured' })
     }
