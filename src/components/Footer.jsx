@@ -4,7 +4,7 @@ export function Footer() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-8">
           <p className="text-sm text-gray-600 mb-3">
-            Desarrollado por <strong>Jorge Lorenzo</strong>
+            creado por <strong className="text-gray-900">jorge lorenzo</strong>
           </p>
           <a
             href="https://insidelife.club"

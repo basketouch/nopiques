@@ -82,6 +82,7 @@ export function AnalyzerForm() {
           onChange={(e) => setInput(e.target.value)}
           placeholder={analysisType === 'url' ? 'https://...' : 'Pega el mensaje aquí...'}
           className="w-full h-24 p-4 border border-gray-300 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-transparent"
+          disabled={loading}
         />
 
         {error && <p className="mt-3 text-red-600 text-sm">{error}</p>}
