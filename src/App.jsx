@@ -5,6 +5,30 @@ import { Footer } from './components/Footer'
 
 function App() {
   const [verifications, setVerifications] = useState(0)
+  const [openFAQ, setOpenFAQ] = useState(null)
+
+  const faqItems = [
+    {
+      question: '¿Es gratis?',
+      answer: 'Sí, completamente gratis. NoPiques es una herramienta pública para ayudar a detectar estafas sin coste alguno.'
+    },
+    {
+      question: '¿Guarda mi información?',
+      answer: 'No. Tu información se elimina inmediatamente después del análisis. No guardamos historiales, datos personales ni enlaces que verificas.'
+    },
+    {
+      question: '¿Por qué debería confiar en NoPiques?',
+      answer: 'Usamos Google Safe Browsing (la misma tecnología que usa Google Chrome) más análisis inteligente. Está creado por una persona real (Jorge Lorenzo) que quiere ayudar, no una empresa que vende datos.'
+    },
+    {
+      question: '¿Qué pasa si me equivoco?',
+      answer: 'Si ves un error, puedes contactar a jorge@insidelife.club. Aunque en la mayoría de casos, si NoPiques dice que es peligroso, es mejor no hacer clic.'
+    },
+    {
+      question: '¿Funciona en todos los dispositivos?',
+      answer: 'Sí. NoPiques funciona en cualquier dispositivo con navegador: teléfono, tablet, computadora. No necesita instalar nada.'
+    }
+  ]
 
   const handleVerification = () => {
     setVerifications(prev => prev + 1)
@@ -160,33 +184,25 @@ function App() {
 
         {/* FAQ Section */}
         <section id="faq" className="border-t border-gray-200 pt-12 scroll-mt-20 mb-16">
-          <h2 className="text-xl font-semibold text-gray-900 mb-8">Preguntas frecuentes</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Preguntas frecuentes</h2>
 
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">¿Es gratis?</h3>
-              <p className="text-sm text-gray-600">Sí, completamente gratis. NoPiques es una herramienta pública para ayudar a detectar estafas sin coste alguno.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">¿Guarda mi información?</h3>
-              <p className="text-sm text-gray-600">No. Tu información se elimina inmediatamente después del análisis. No guardamos historiales, datos personales ni enlaces que verificas.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">¿Por qué debería confiar en NoPiques?</h3>
-              <p className="text-sm text-gray-600">Usamos Google Safe Browsing (la misma tecnología que usa Google Chrome) más análisis inteligente. Está creado por una persona real (Jorge Lorenzo) que quiere ayudar, no una empresa que vende datos.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">¿Qué pasa si me equivoco?</h3>
-              <p className="text-sm text-gray-600">Si ves un error, puedes contactar a jorge@insidelife.club. Aunque en la mayoría de casos, si NoPiques dice que es peligroso, es mejor no hacer clic.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">¿Funciona en todos los dispositivos?</h3>
-              <p className="text-sm text-gray-600">Sí. NoPiques funciona en cualquier dispositivo con navegador: teléfono, tablet, computadora. No necesita instalar nada.</p>
-            </div>
+          <div className="space-y-2 border border-gray-200">
+            {faqItems.map((item, index) => (
+              <div key={index} className={index > 0 ? 'border-t border-gray-200' : ''}>
+                <button
+                  onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                  className="w-full px-4 py-3 text-left font-semibold text-gray-900 hover:bg-gray-50 flex items-center justify-between transition-colors"
+                >
+                  <span>{item.question}</span>
+                  <span className={`text-lg font-bold transition-transform ${openFAQ === index ? 'rotate-45' : ''}`}>+</span>
+                </button>
+                {openFAQ === index && (
+                  <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 text-sm text-gray-600 animate-in fade-in duration-200">
+                    {item.answer}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </section>
       </main>
