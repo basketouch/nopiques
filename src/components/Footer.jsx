@@ -1,43 +1,37 @@
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12 mt-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <footer className="border-t border-gray-200 bg-white py-12 mt-16">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
           <div>
-            <h3 className="text-lg font-bold mb-4">NoPiques.es</h3>
-            <p className="text-gray-400">
-              Herramienta gratuita para detectar estafas y fraudes online.
+            <p className="text-sm text-gray-600">
+              Herramienta simple para verificar URLs y mensajes sospechosos.
             </p>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4">Autor</h3>
-            <p className="text-gray-400 mb-2">
+            <p className="text-sm text-gray-600 mb-1">
               Desarrollado por <strong>Jorge Lorenzo</strong>
             </p>
             <a
               href="https://insidelife.club"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition"
+              className="text-sm text-blue-600 hover:text-blue-700"
             >
-              📌 Visita insidelife.club
+              insidelife.club
             </a>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4">Tecnología</h3>
-            <p className="text-gray-400 text-sm">
-              • React + Vite<br/>
-              • Claude IA<br/>
-              • Google Safe Browsing<br/>
-              • Vercel
+            <p className="text-sm text-gray-500">
+              React • Vercel • Google Safe Browsing • Claude
             </p>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-500">
-          <p>© 2026 NoPiques.es - Todos los derechos reservados</p>
+        <div className="border-t border-gray-200 pt-8 text-center">
+          <p className="text-xs text-gray-500">© 2026 NoPiques.es</p>
         </div>
       </div>
     </footer>

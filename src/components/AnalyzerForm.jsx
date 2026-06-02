@@ -42,46 +42,57 @@ export function AnalyzerForm() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4">
-      <form onSubmit={handleAnalyze} className="mt-8">
-        <div className="flex gap-4 mb-6">
-          <label className="flex items-center">
+    <div className="w-full">
+      <form onSubmit={handleAnalyze}>
+        {/* Tabs */}
+        <div className="flex border-b border-gray-200 mb-6">
+          <label className={`px-4 py-3 cursor-pointer text-sm font-medium border-b-2 transition-colors ${
+            analysisType === 'url'
+              ? 'border-gray-900 text-gray-900'
+              : 'border-transparent text-gray-500 hover:text-gray-700'
+          }`}>
             <input
               type="radio"
               value="url"
               checked={analysisType === 'url'}
               onChange={(e) => setAnalysisType(e.target.value)}
-              className="mr-2"
+              className="hidden"
             />
-            <span>Analizar URL</span>
+            URL
           </label>
-          <label className="flex items-center">
+          <label className={`px-4 py-3 cursor-pointer text-sm font-medium border-b-2 transition-colors ${
+            analysisType === 'text'
+              ? 'border-gray-900 text-gray-900'
+              : 'border-transparent text-gray-500 hover:text-gray-700'
+          }`}>
             <input
               type="radio"
               value="text"
               checked={analysisType === 'text'}
               onChange={(e) => setAnalysisType(e.target.value)}
-              className="mr-2"
+              className="hidden"
             />
-            <span>Analizar mensaje</span>
+            Mensaje
           </label>
         </div>
 
+        {/* Input */}
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={analysisType === 'url' ? 'Pega la URL aquí...' : 'Pega el mensaje, email o SMS aquí...'}
-          className="w-full h-32 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:outline-none focus:border-blue-500"
+          placeholder={analysisType === 'url' ? 'https://...' : 'Pega el mensaje aquí...'}
+          className="w-full h-24 p-4 border border-gray-300 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-transparent"
         />
 
-        {error && <p className="mt-4 text-red-600 font-semibold">{error}</p>}
+        {error && <p className="mt-3 text-red-600 text-sm">{error}</p>}
 
+        {/* Button */}
         <button
           type="submit"
           disabled={loading}
-          className="mt-6 w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-lg text-lg transition-colors"
+          className="mt-6 w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white font-medium py-3 px-4 text-sm transition-colors"
         >
-          {loading ? 'Analizando...' : '¿Es seguro?'}
+          {loading ? 'Analizando...' : 'Verificar'}
         </button>
       </form>
 

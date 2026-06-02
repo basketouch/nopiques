@@ -3,65 +3,66 @@ import { Footer } from './components/Footer'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col">
-      {/* Header Hero */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16 mb-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="mb-6 text-6xl">🛡️</div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            ¿Te están intentando engañar?
-          </h1>
-          <p className="text-xl md:text-2xl opacity-90 mb-4">
-            Detecta estafas, phishing y fraudes en segundos
-          </p>
-          <div className="flex gap-4 justify-center text-sm opacity-80">
-            <span>✨ Análisis seguro</span>
-            <span>•</span>
-            <span>🚀 Instantáneo</span>
-            <span>•</span>
-            <span>🔒 Sin datos guardados</span>
+    <div className="min-h-screen bg-white flex flex-col">
+      {/* Header minimalista */}
+      <header className="border-b border-gray-200">
+        <div className="max-w-5xl mx-auto px-6 py-8">
+          <div className="mb-6">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+              NoPiques
+            </h1>
+            <p className="text-gray-600 text-base">
+              Verifica si esa URL o mensaje es legítimo
+            </p>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
-      <div className="flex-grow max-w-4xl mx-auto px-4 pb-12 w-full">
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <p className="text-center text-gray-700 mb-8 text-lg">
-            Pega aquí el enlace o mensaje y te ayudamos a comprobarlo
-          </p>
+      <main className="flex-grow max-w-5xl mx-auto w-full px-6 py-12">
+        {/* Form Section */}
+        <div className="mb-16">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-900 mb-4">
+              ¿Qué quieres verificar?
+            </label>
+          </div>
           <AnalyzerForm />
         </div>
 
-        {/* Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
-            <h3 className="font-bold text-green-900 mb-2">✅ Seguro</h3>
-            <p className="text-sm text-gray-700">
-              URLs y mensajes legítimos son verificados contra bases de datos de seguridad.
+        {/* How it works */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-gray-200 pt-12">
+          <div>
+            <div className="text-2xl font-bold text-green-600 mb-3">✓</div>
+            <h3 className="font-semibold text-gray-900 mb-2">Seguro</h3>
+            <p className="text-sm text-gray-600">
+              El sitio ha sido verificado. Parece ser legítimo.
             </p>
           </div>
-          <div className="p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
-            <h3 className="font-bold text-yellow-900 mb-2">⚠️ Sospechoso</h3>
-            <p className="text-sm text-gray-700">
-              Detectamos señales de posible fraude o phishing. Revisa antes de hacer clic.
+          <div>
+            <div className="text-2xl font-bold text-yellow-600 mb-3">!</div>
+            <h3 className="font-semibold text-gray-900 mb-2">Sospechoso</h3>
+            <p className="text-sm text-gray-600">
+              Hemos detectado señales de alerta. Revisa con cuidado antes de continuar.
             </p>
           </div>
-          <div className="p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
-            <h3 className="font-bold text-red-900 mb-2">⛔ Peligroso</h3>
-            <p className="text-sm text-gray-700">
-              Alto riesgo de estafa detectado. No hagas clic ni compartas información.
+          <div>
+            <div className="text-2xl font-bold text-red-600 mb-3">✕</div>
+            <h3 className="font-semibold text-gray-900 mb-2">Peligroso</h3>
+            <p className="text-sm text-gray-600">
+              Alto riesgo. Probablemente sea una estafa. No continúes.
             </p>
           </div>
-        </div>
+        </section>
 
-        {/* Privacy Notice */}
-        <div className="p-6 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
-          <p className="text-sm text-gray-700">
-            <strong>🔒 Privacidad:</strong> No guardamos tu información. Todo se analiza de forma segura y se elimina inmediatamente después.
+        {/* Privacy */}
+        <section className="mt-16 pt-12 border-t border-gray-200">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Privacidad</h2>
+          <p className="text-gray-600 text-sm max-w-2xl">
+            Tu información no se guarda. El análisis se realiza de forma segura y todos los datos se eliminan inmediatamente después. Nada se registra ni se comparte.
           </p>
-        </div>
-      </div>
+        </section>
+      </main>
 
       {/* Footer */}
       <Footer />

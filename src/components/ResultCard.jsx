@@ -1,45 +1,53 @@
 export function ResultCard({ result, loading }) {
   if (loading) {
     return (
-      <div className="mt-8 p-6 bg-gray-100 rounded-lg text-center">
-        <p className="text-lg">Analizando...</p>
+      <div className="mt-8 p-6 text-center">
+        <p className="text-sm text-gray-500">Analizando...</p>
       </div>
     );
   }
 
   if (!result) return null;
 
-  const riskColors = {
-    safe: 'bg-safe',
-    warning: 'bg-warning',
-    danger: 'bg-danger',
+  const styles = {
+    safe: {
+      borderColor: '#10b981',
+      textColor: '#047857',
+      symbolColor: '#10b981',
+    },
+    warning: {
+      borderColor: '#f59e0b',
+      textColor: '#92400e',
+      symbolColor: '#f59e0b',
+    },
+    danger: {
+      borderColor: '#ef4444',
+      textColor: '#b91c1c',
+      symbolColor: '#ef4444',
+    },
   };
 
-  const textColors = {
-    safe: 'text-safe',
-    warning: 'text-warning',
-    danger: 'text-danger',
-  };
-
-  const bgColors = {
-    safe: 'bg-green-50',
-    warning: 'bg-yellow-50',
-    danger: 'bg-red-50',
-  };
+  const style = styles[result.riskLevel] || styles.warning;
 
   return (
-    <div className={`mt-8 p-6 rounded-lg ${bgColors[result.riskLevel] || 'bg-gray-50'}`}>
-      <div className="text-5xl mb-4">{result.emoji || '❓'}</div>
-      <h2 className={`text-2xl font-bold mb-2 ${textColors[result.riskLevel] || 'text-gray-700'}`}>
-        {result.title}
-      </h2>
-      <p className="text-lg mb-4 text-gray-700">{result.explanation}</p>
-      <div className="bg-white p-4 rounded border-l-4" style={{ borderLeftColor: result.riskLevel === 'safe' ? '#10b981' : result.riskLevel === 'warning' ? '#f59e0b' : '#ef4444' }}>
-        <p className="font-semibold text-gray-900">¿Qué hacer?</p>
-        <p className="text-gray-700 mt-2">{result.advice}</p>
+    <div className="mt-8 border-l-4 p-6" style={{ borderLeftColor: style.borderColor }}>
+      <div className="flex items-start gap-4">
+        <div className="text-3xl flex-shrink-0" style={{ color: style.symbolColor }}>
+          {result.emoji}
+        </div>
+        <div className="flex-grow">
+          <h2 className="text-lg font-semibold mb-2" style={{ color: style.textColor }}>
+            {result.title}
+          </h2>
+          <p className="text-gray-700 text-sm mb-4">{result.explanation}</p>
+          <div className="bg-gray-50 p-4 rounded border border-gray-200">
+            <p className="text-xs font-semibold text-gray-900 uppercase mb-2">Recomendación</p>
+            <p className="text-sm text-gray-700">{result.advice}</p>
+          </div>
+        </div>
       </div>
       {result.error && (
-        <p className="text-sm text-red-600 mt-4">⚠️ {result.error}</p>
+        <p className="text-xs text-red-600 mt-4 ml-14">Error: {result.error}</p>
       )}
     </div>
   );
