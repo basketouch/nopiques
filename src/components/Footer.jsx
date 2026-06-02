@@ -29,13 +29,6 @@ export function Footer() {
             >
               privacidad
             </a>
-            <span>•</span>
-            <a
-              href="#privacidad"
-              className="hover:text-gray-900 transition"
-            >
-              privacidad
-            </a>
           </div>
         </div>
 
