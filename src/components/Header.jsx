@@ -42,8 +42,11 @@ export function Header() {
         <h1 className="text-3xl font-semibold text-gray-900 mb-6">
           Detecta estafas en segundos
         </h1>
-        <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
+        <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed mb-6">
           Verifica enlaces y mensajes sospechosos al instante. Usa tecnología de Google y análisis inteligente. Funciona en cualquier dispositivo. Gratis y 100% privado.
+        </p>
+        <p className="text-xs text-gray-400">
+          Creado por Jorge Lorenzo
         </p>
       </div>
     </header>
