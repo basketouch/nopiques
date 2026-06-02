@@ -1,42 +1,25 @@
 import { AnalyzerForm } from './components/AnalyzerForm'
+import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 
 function App() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/* Header */}
-      <header className="border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6 py-12">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-4">
-            NoPiques
-          </h1>
-          <p className="text-gray-600 text-base mb-4 max-w-2xl">
-            Detecta si un enlace o mensaje es legítimo o probablemente una estafa. Pega la URL o el texto y te diremos si es seguro hacer clic.
-          </p>
-          <p className="text-sm text-gray-500">
-            Usado por personas que reciben mensajes sospechosos de WhatsApp, email, SMS o redes sociales. Ideal para verificar antes de compartir datos o hacer clic.
-          </p>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <main className="flex-grow max-w-5xl mx-auto w-full px-6 py-12">
         {/* Form Section */}
-        <div className="mb-12">
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-900 mb-4">
-              ¿Qué quieres verificar?
-            </label>
-          </div>
+        <div id="verificador" className="mb-12 scroll-mt-20">
+          <label className="block text-sm font-medium text-gray-900 mb-4">
+            ¿Qué quieres verificar?
+          </label>
           <AnalyzerForm />
         </div>
 
-        {/* Privacy Banner - Prominent */}
-        <div className="mb-16 p-6 bg-gray-50 border border-gray-200 rounded">
-          <h3 className="text-sm font-semibold text-gray-900 mb-2">Análisis privado y seguro</h3>
-          <p className="text-sm text-gray-600">
-            Tu información no se guarda. El análisis se realiza de forma segura y todos los datos se eliminan inmediatamente después. Nada se registra ni se comparte.
-          </p>
+        {/* Privacy Notice - Minimal */}
+        <div className="text-xs text-gray-500 mb-16 p-3 bg-gray-50 border border-gray-100">
+          <strong>Privacidad:</strong> Tu información no se guarda. Se elimina inmediatamente después del análisis.
         </div>
 
         {/* How it works */}
@@ -65,7 +48,7 @@ function App() {
         </section>
 
         {/* Tips Section */}
-        <section className="border-t border-gray-200 pt-12">
+        <section id="consejos" className="border-t border-gray-200 pt-12 scroll-mt-20">
           <h2 className="text-xl font-semibold text-gray-900 mb-8">Consejos para evitar estafas</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
