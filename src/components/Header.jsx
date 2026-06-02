@@ -39,11 +39,11 @@ export function Header() {
 
       {/* Header Content */}
       <div className="max-w-5xl mx-auto px-6 py-12 text-center">
-        <h1 className="text-3xl font-semibold text-gray-900 mb-4">
+        <h1 className="text-3xl font-semibold text-gray-900 mb-6">
           Detecta estafas en segundos
         </h1>
-        <p className="text-gray-600 text-base max-w-2xl mx-auto">
-          Pega una URL o mensaje sospechoso y verifica si es legítimo o probablemente una estafa.
+        <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
+          Verifica enlaces y mensajes sospechosos al instante. Usa tecnología de Google y análisis inteligente. Funciona en cualquier dispositivo. Gratis y 100% privado.
         </p>
       </div>
     </header>
