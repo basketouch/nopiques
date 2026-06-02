@@ -38,11 +38,11 @@ export function Header() {
       </div>
 
       {/* Header Content */}
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-6 py-12 text-center">
         <h1 className="text-3xl font-semibold text-gray-900 mb-4">
           Detecta estafas en segundos
         </h1>
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto">
           <p className="text-gray-600 text-base mb-3">
             Pega una URL o mensaje sospechoso y verifica si es legítimo o probablemente una estafa.
           </p>
