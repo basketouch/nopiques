@@ -32,11 +32,17 @@ export default async function handler(req, res) {
         max_tokens: 200,
         messages: [{
           role: 'user',
-          content: `Analiza este texto para detectar si es una estafa:
-"${text}"
+          content: `Eres un experto en detectar estafas, phishing y fraudes. Analiza el siguiente texto y determina si es una estafa.
 
-Responde SOLO con un JSON válido (sin markdown, sin comillas adicionales):
-{"riskLevel":"safe","warning","danger","title":"...","explanation":"..."}`
+Texto a analizar:
+"""
+${text}
+"""
+
+Responde ÚNICAMENTE con un objeto JSON válido, sin markdown ni texto adicional, con esta estructura exacta:
+{"riskLevel": "safe" | "warning" | "danger", "title": "titulo corto en español", "explanation": "explicacion breve en español de por que es seguro o peligroso"}
+
+Donde riskLevel es uno de: "safe" (legítimo), "warning" (sospechoso), "danger" (estafa clara).`
         }]
       })
     })
