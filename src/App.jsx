@@ -121,6 +121,20 @@ function App() {
         <section id="sobre" className="border-t border-gray-200 pt-12 scroll-mt-20 mb-16">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Sobre NoPiques</h2>
 
+          {/* Jorge's Profile */}
+          <div className="flex gap-6 mb-8 items-start">
+            <img src="/jorge.jpg" alt="Jorge Lorenzo" className="w-24 h-32 rounded-lg object-cover flex-shrink-0 shadow-sm border border-gray-200" />
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Jorge Lorenzo</h3>
+              <p className="text-sm text-gray-700 leading-relaxed mb-1">Creador de NoPiques</p>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                7 años entrenador asistente<br/>
+                Selección de Baloncesto de España<br/>
+                <span className="font-medium text-gray-600">🏆 2 Medallas de Oro</span>
+              </p>
+            </div>
+          </div>
+
           <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
             <p>
               Me llamo <strong>Jorge Lorenzo</strong>. Creé NoPiques porque un día recibí un mensaje sospechoso que parecía ser de la AEAT (Agencia Tributaria). El enlace era idéntico al real, el mensaje era convincente, y francamente, me asustó. No sabía si era verdad o una estafa. Fue entonces cuando me di cuenta de un problema: <strong>la mayoría de las personas no técnicas no tienen forma rápida y fácil de verificar si un mensaje es real o falso</strong>.
