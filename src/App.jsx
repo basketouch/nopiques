@@ -146,11 +146,16 @@ function App() {
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Sobre NoPiques</h2>
 
           {/* Jorge's Profile */}
-          <div className="flex gap-6 mb-8 items-start">
-            <img src="/jorge.jpg" alt="Jorge Lorenzo" className="w-24 h-32 rounded-lg object-cover flex-shrink-0 shadow-sm border border-gray-200" />
-            <div>
+          <div className="flex gap-8 mb-8 items-start">
+            {/* Photo - 40% width */}
+            <div className="w-2/5 flex-shrink-0">
+              <img src="/jorge.jpg" alt="Jorge Lorenzo" className="w-full rounded-lg object-cover shadow-md border border-gray-200" />
+            </div>
+
+            {/* Text - 60% width */}
+            <div className="w-3/5">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Jorge Lorenzo</h3>
-              <p className="text-sm text-gray-700 leading-relaxed mb-1">Creador de NoPiques</p>
+              <p className="text-sm text-gray-700 leading-relaxed mb-3">Creador de NoPiques</p>
               <p className="text-xs text-gray-500 leading-relaxed">
                 7 años entrenador asistente<br/>
                 Selección de Baloncesto de España<br/>
