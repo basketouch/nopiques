@@ -2,8 +2,8 @@ export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   
   try {
-    const googleKey = process.env.VITE_GOOGLE_SAFE_BROWSING_API_KEY
-    const claudeKey = process.env.VITE_ANTHROPIC_API_KEY
+    const googleKey = process.env.GOOGLE_SAFE_BROWSING_API_KEY
+    const claudeKey = process.env.ANTHROPIC_API_KEY
     
     return res.json({
       timestamp: new Date().toISOString(),
