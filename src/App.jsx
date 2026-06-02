@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { PrivacyPage } from './pages/PrivacyPage'
 import { AnalyzerForm } from './components/AnalyzerForm'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
+import { PrivacyPage } from './pages/PrivacyPage'
 
 function App() {
   const [verifications, setVerifications] = useState(0)
@@ -36,7 +36,6 @@ function App() {
     setVerifications(prev => prev + 1)
   }
 
-  
   const LandingPage = () => (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
@@ -166,25 +165,25 @@ function App() {
 
             {/* Text - 80% width */}
             <div className="w-4/5 space-y-4 text-sm text-gray-700 leading-relaxed">
-            <p>
-              Me llamo <strong>Jorge Lorenzo</strong>. Creé NoPiques porque un día recibí un mensaje sospechoso que parecía ser de la AEAT (Agencia Tributaria). El enlace era idéntico al real, el mensaje era convincente, y francamente, me asustó. No sabía si era verdad o una estafa. Fue entonces cuando me di cuenta de un problema: <strong>la mayoría de las personas no técnicas no tienen forma rápida y fácil de verificar si un mensaje es real o falso</strong>.
-            </p>
+              <p>
+                Me llamo <strong>Jorge Lorenzo</strong>. Creé NoPiques porque un día recibí un mensaje sospechoso que parecía ser de la AEAT (Agencia Tributaria). El enlace era idéntico al real, el mensaje era convincente, y francamente, me asustó. No sabía si era verdad o una estafa. Fue entonces cuando me di cuenta de un problema: <strong>la mayoría de las personas no técnicas no tienen forma rápida y fácil de verificar si un mensaje es real o falso</strong>.
+              </p>
 
-            <p>
-              Decidí crear NoPiques para resolver esto. No quería una herramienta complicada o llena de tecnicismos. Quería algo simple, directo y que funcionara en menos de 10 segundos. <strong>Algo que tu abuela pudiera usar sin problemas</strong>.
-            </p>
+              <p>
+                Decidí crear NoPiques para resolver esto. No quería una herramienta complicada o llena de tecnicismos. Quería algo simple, directo y que funcionara en menos de 10 segundos. <strong>Algo que tu abuela pudiera usar sin problemas</strong>.
+              </p>
 
-            <p>
-              Técnicamente, NoPiques usa <strong>Google Safe Browsing</strong> (la misma tecnología que usa Google Chrome para detectar phishing) más <strong>análisis inteligente con IA</strong> que lee el contexto del mensaje y busca señales de alerta típicas de estafas. Si dos sistemas dicen que algo es peligroso, probablemente lo sea.
-            </p>
+              <p>
+                Técnicamente, NoPiques usa <strong>Google Safe Browsing</strong> (la misma tecnología que usa Google Chrome para detectar phishing) más <strong>análisis inteligente con IA</strong> que lee el contexto del mensaje y busca señales de alerta típicas de estafas. Si dos sistemas dicen que algo es peligroso, probablemente lo sea.
+              </p>
 
-            <p>
-              Tu privacidad es sagrada. NoPiques <strong>no guarda nada</strong>. Tu URL, tu mensaje, tu información personal: todo se analiza y se borra inmediatamente. Puedes usar esto sin miedo a que tu información se venda o se use contra ti.
-            </p>
+              <p>
+                Tu privacidad es sagrada. NoPiques <strong>no guarda nada</strong>. Tu URL, tu mensaje, tu información personal: todo se analiza y se borra inmediatamente. Puedes usar esto sin miedo a que tu información se venda o se use contra ti.
+              </p>
 
-            <p className="text-xs text-gray-500 pt-2">
-              Si recibiste un mensaje sospechoso, cópialo aquí y verifícalo. Si dice que es peligroso, probablemente lo sea. Si dice que es seguro, probablemente puedas confiar. No es ciencia exacta, pero es mucho mejor que no verificar nada.
-            </p>
+              <p className="text-xs text-gray-500 pt-2">
+                Si recibiste un mensaje sospechoso, cópialo aquí y verifícalo. Si dice que es peligroso, probablemente lo sea. Si dice que es seguro, probablemente puedas confiar. No es ciencia exacta, pero es mucho mejor que no verificar nada.
+              </p>
             </div>
           </div>
         </section>
@@ -214,65 +213,10 @@ function App() {
         </section>
       </main>
 
-        {/* Terms Section */}
-        <section id="privacidad" className="border-t border-gray-200 pt-12 scroll-mt-20 mb-16">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Privacidad</h2>
-
-          <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">1. Servicio</h3>
-              <p>NoPiques.es proporciona un servicio gratuito de análisis de URLs y mensajes SMS para detectar posibles estafas y phishing usando Google Safe Browsing y análisis inteligente con IA.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">2. Privacidad y Datos</h3>
-              <p><strong>Tu información no se guarda.</strong> Las URLs, mensajes y datos que envíes se analizan una única vez y se eliminan inmediatamente después. No guardamos historiales, datos personales, cookies de rastreo ni compartimos datos con terceros.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">3. Limitaciones</h3>
-              <p>NoPiques es una herramienta de ayuda, no una garantía absoluta. Los resultados se basan en análisis heurísticos y pueden no ser 100% precisos. Un resultado "seguro" no garantiza que un enlace sea completamente seguro. Un resultado "peligroso" indica probable riesgo. Si tienes dudas, consulta directamente con la entidad (banco, gobierno, etc.) antes de compartir datos.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">4. Responsabilidad del Usuario</h3>
-              <p>Eres el único responsable de las decisiones que tomes basándote en nuestros resultados. NoPiques es una herramienta de apoyo, no protección total. Tu uso del servicio es bajo tu propio riesgo.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">5. Exención de Responsabilidad</h3>
-              <p>Jorge Lorenzo no será responsable de pérdidas financieras, daños, errores de análisis, falsos positivos/negativos, interrupciones del servicio, o ciberataques no detectados. El servicio se proporciona "tal cual" sin garantías implícitas de precisión o disponibilidad.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">6. Propiedad Intelectual</h3>
-              <p>NoPiques es propiedad intelectual de Jorge Lorenzo. Puedes usar el servicio libremente, pero no puedes copiar, modificar, distribuir el código, hacer scraping o usarlo como base para un servicio competidor.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">7. Legislación</h3>
-              <p>Estos términos se rigen por la ley española. Cualquier disputa será resuelta en los tribunales españoles.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-2">8. Contacto</h3>
-              <p>Si encuentras un error, tienes dudas sobre privacidad o sugerencias, contacta a <strong>jorge@insidelife.club</strong></p>
-            </div>
-
-            <div className="bg-gray-50 p-4 border border-gray-200 mt-6">
-              <p className="text-xs text-gray-600">
-                <strong>Resumen:</strong> NoPiques es gratis, no guarda datos, es una herramienta de ayuda (no garantía), usarla es bajo tu riesgo, y somos responsables solo bajo ley española. ¿Dudas? Escribe a jorge@insidelife.club
-              </p>
-            </div>
-          </div>
-        </section>
-
       {/* Footer */}
       <Footer />
     </div>
   )
-}
-
 
   return (
     <Routes>
