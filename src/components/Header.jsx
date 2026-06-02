@@ -42,14 +42,9 @@ export function Header() {
         <h1 className="text-3xl font-semibold text-gray-900 mb-4">
           Detecta estafas en segundos
         </h1>
-        <div className="max-w-2xl mx-auto">
-          <p className="text-gray-600 text-base mb-3">
-            Pega una URL o mensaje sospechoso y verifica si es legítimo o probablemente una estafa.
-          </p>
-          <p className="text-sm text-gray-500">
-            Usado por personas que reciben mensajes en WhatsApp, email, SMS o redes sociales y quieren verificar antes de hacer clic o compartir datos.
-          </p>
-        </div>
+        <p className="text-gray-600 text-base max-w-2xl mx-auto">
+          Pega una URL o mensaje sospechoso y verifica si es legítimo o probablemente una estafa.
+        </p>
       </div>
     </header>
   );
