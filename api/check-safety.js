@@ -63,7 +63,7 @@ export default async function handler(req, res) {
           },
           body: JSON.stringify({
             model: 'claude-haiku-4-5-20251001',
-            max_tokens: 250,
+            max_tokens: 350,
             messages: [{
               role: 'user',
               content: `Eres un experto en detectar webs fraudulentas y phishing. Analiza esta dirección web:
@@ -75,10 +75,11 @@ Fíjate especialmente en:
 - Palabras de cebo o urgencia en la dirección.
 
 Responde ÚNICAMENTE con un JSON válido, sin texto adicional, con esta estructura:
-{"riskLevel": "safe" | "warning" | "danger", "title": "titulo corto", "explanation": "explicacion"}
+{"riskLevel": "safe" | "warning" | "danger", "title": "titulo corto", "explanation": "explicacion", "advice": "consejo concreto de que hacer en ESTE caso"}
 
 riskLevel: "safe" (parece legítima), "warning" (sospechosa, ten cuidado), "danger" (casi seguro estafa).
-La explicación debe estar en español MUY SENCILLO, sin tecnicismos, como si se lo explicaras a una persona mayor. Máximo 2 frases.`
+La explicación y el consejo en español MUY SENCILLO, sin tecnicismos, como para una persona mayor. Máximo 2 frases cada uno.
+Para "advice": da un consejo CONCRETO de este caso, NO genérico. Si la web imita a una entidad real, di cómo llegar a la web oficial de verdad (ej: si imita a Hacienda, di que escriba agenciatributaria.gob.es; si imita a Correos, que use la app o web oficial de Correos; si imita al banco, que llame al número de su tarjeta).`
             }]
           })
         })
@@ -95,7 +96,9 @@ La explicación debe estar en español MUY SENCILLO, sin tecnicismos, como si se
               title: r.title || (level === 'safe' ? 'Seguro' : level === 'danger' ? 'Peligroso' : 'Sospechoso'),
               emoji: level === 'safe' ? '✓' : level === 'danger' ? '✕' : '!',
               explanation: r.explanation || 'Análisis completado.',
-              advice: level === 'safe' ? 'Parece de fiar, pero ante la duda no pongas datos personales.' : 'No entres ni pongas tus datos. Si dudas, busca la web oficial en Google.'
+              advice: r.advice || (level === 'safe'
+                ? 'Parece de fiar, pero ante la duda no pongas datos personales ni del banco.'
+                : 'No entres ni pongas tus datos. Si dudas, busca la web oficial escribiéndola tú mismo en el navegador.')
             })
           }
         }
