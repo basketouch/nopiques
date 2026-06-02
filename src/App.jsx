@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { PrivacyPage } from './pages/PrivacyPage'
 import { AnalyzerForm } from './components/AnalyzerForm'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
@@ -34,7 +36,8 @@ function App() {
     setVerifications(prev => prev + 1)
   }
 
-  return (
+  
+  const LandingPage = () => (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
 
@@ -267,6 +270,16 @@ function App() {
       {/* Footer */}
       <Footer />
     </div>
+  )
+}
+
+)
+
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/privacidad" element={<PrivacyPage />} />
+    </Routes>
   )
 }
 

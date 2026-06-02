@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-white py-12 mt-16">
@@ -23,12 +25,12 @@ export function Footer() {
               soporte
             </a>
             <span>•</span>
-            <a
-              href="#privacidad"
+            <Link
+              to="/privacidad"
               className="hover:text-gray-900 transition"
             >
               privacidad
-            </a>
+            </Link>
           </div>
         </div>
 
