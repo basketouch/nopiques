@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ResultCard } from './ResultCard';
 
-export function AnalyzerForm() {
+export function AnalyzerForm({ onVerification }) {
   const [input, setInput] = useState('');
   const [analysisType, setAnalysisType] = useState('url');
   const [result, setResult] = useState(null);
@@ -34,6 +34,7 @@ export function AnalyzerForm() {
 
       const data = await response.json();
       setResult(data);
+      if (onVerification) onVerification();
     } catch (err) {
       setError(err.message || 'Error desconocido');
     } finally {

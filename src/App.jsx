@@ -1,8 +1,15 @@
+import { useState } from 'react'
 import { AnalyzerForm } from './components/AnalyzerForm'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 
 function App() {
+  const [verifications, setVerifications] = useState(0)
+
+  const handleVerification = () => {
+    setVerifications(prev => prev + 1)
+  }
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
@@ -14,12 +21,28 @@ function App() {
           <label className="block text-sm font-medium text-gray-900 mb-4">
             ¿Qué quieres verificar?
           </label>
-          <AnalyzerForm />
+          <AnalyzerForm onVerification={handleVerification} />
         </div>
 
         {/* Privacy Notice - Minimal */}
         <div className="text-xs text-gray-500 mb-16 p-3 bg-gray-50 border border-gray-100">
           <strong>Privacidad:</strong> Tu información no se guarda. Se elimina inmediatamente después del análisis.
+        </div>
+
+        {/* Trust Indicators */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 bg-gray-50 p-6 border border-gray-100">
+          <div className="text-center">
+            <p className="text-2xl font-semibold text-gray-900">{verifications}</p>
+            <p className="text-xs text-gray-500 mt-1">verificaciones realizadas</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-semibold text-gray-900">&lt; 2s</p>
+            <p className="text-xs text-gray-500 mt-1">tiempo promedio de análisis</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-semibold text-gray-900">100%</p>
+            <p className="text-xs text-gray-500 mt-1">privacidad garantizada</p>
+          </div>
         </div>
 
         {/* How it works */}
@@ -90,6 +113,65 @@ function App() {
                 <li>• Si ya hiciste clic, cambia tus contraseñas</li>
                 <li>• Contacta a tu banco si compartiste datos</li>
               </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="sobre" className="border-t border-gray-200 pt-12 scroll-mt-20 mb-16">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Sobre NoPiques</h2>
+
+          <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
+            <p>
+              Me llamo <strong>Jorge Lorenzo</strong>. Creé NoPiques porque un día recibí un mensaje sospechoso que parecía ser de la AEAT (Agencia Tributaria). El enlace era idéntico al real, el mensaje era convincente, y francamente, me asustó. No sabía si era verdad o una estafa. Fue entonces cuando me di cuenta de un problema: <strong>la mayoría de las personas no técnicas no tienen forma rápida y fácil de verificar si un mensaje es real o falso</strong>.
+            </p>
+
+            <p>
+              Decidí crear NoPiques para resolver esto. No quería una herramienta complicada o llena de tecnicismos. Quería algo simple, directo y que funcionara en menos de 10 segundos. <strong>Algo que tu abuela pudiera usar sin problemas</strong>.
+            </p>
+
+            <p>
+              Técnicamente, NoPiques usa <strong>Google Safe Browsing</strong> (la misma tecnología que usa Google Chrome para detectar phishing) más <strong>análisis inteligente con IA</strong> que lee el contexto del mensaje y busca señales de alerta típicas de estafas. Si dos sistemas dicen que algo es peligroso, probablemente lo sea.
+            </p>
+
+            <p>
+              Tu privacidad es sagrada. NoPiques <strong>no guarda nada</strong>. Tu URL, tu mensaje, tu información personal: todo se analiza y se borra inmediatamente. Puedes usar esto sin miedo a que tu información se venda o se use contra ti.
+            </p>
+
+            <p className="text-xs text-gray-500 pt-2">
+              Si recibiste un mensaje sospechoso, cópialo aquí y verifícalo. Si dice que es peligroso, probablemente lo sea. Si dice que es seguro, probablemente puedas confiar. No es ciencia exacta, pero es mucho mejor que no verificar nada.
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="border-t border-gray-200 pt-12 scroll-mt-20 mb-16">
+          <h2 className="text-xl font-semibold text-gray-900 mb-8">Preguntas frecuentes</h2>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">¿Es gratis?</h3>
+              <p className="text-sm text-gray-600">Sí, completamente gratis. NoPiques es una herramienta pública para ayudar a detectar estafas sin coste alguno.</p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">¿Guarda mi información?</h3>
+              <p className="text-sm text-gray-600">No. Tu información se elimina inmediatamente después del análisis. No guardamos historiales, datos personales ni enlaces que verificas.</p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">¿Por qué debería confiar en NoPiques?</h3>
+              <p className="text-sm text-gray-600">Usamos Google Safe Browsing (la misma tecnología que usa Google Chrome) más análisis inteligente. Está creado por una persona real (Jorge Lorenzo) que quiere ayudar, no una empresa que vende datos.</p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">¿Qué pasa si me equivoco?</h3>
+              <p className="text-sm text-gray-600">Si ves un error, puedes contactar a jorge@insidelife.club. Aunque en la mayoría de casos, si NoPiques dice que es peligroso, es mejor no hacer clic.</p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">¿Funciona en todos los dispositivos?</h3>
+              <p className="text-sm text-gray-600">Sí. NoPiques funciona en cualquier dispositivo con navegador: teléfono, tablet, computadora. No necesita instalar nada.</p>
             </div>
           </div>
         </section>

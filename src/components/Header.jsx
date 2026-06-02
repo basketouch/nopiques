@@ -25,6 +25,18 @@ export function Header() {
             >
               Consejos
             </button>
+            <button
+              onClick={() => scrollToSection('sobre')}
+              className="text-sm text-gray-600 hover:text-gray-900 transition"
+            >
+              Sobre
+            </button>
+            <button
+              onClick={() => scrollToSection('faq')}
+              className="text-sm text-gray-600 hover:text-gray-900 transition"
+            >
+              FAQ
+            </button>
             <a
               href="https://insidelife.club"
               target="_blank"
