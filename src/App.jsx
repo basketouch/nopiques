@@ -273,7 +273,6 @@ function App() {
   )
 }
 
-)
 
   return (
     <Routes>
