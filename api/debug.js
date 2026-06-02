@@ -3,7 +3,7 @@ export default function handler(req, res) {
   
   try {
     const googleKey = process.env.GOOGLE_SAFE_BROWSING_API_KEY
-    const claudeKey = process.env.ANTHROPIC_API_KEY
+    const claudeKey = process.env.CLAUDE_API_KEY
     
     return res.json({
       timestamp: new Date().toISOString(),
