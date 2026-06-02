@@ -12,13 +12,13 @@ export default async function handler(req, res) {
   }
 
   const { url } = req.body
-
-  if (!url) {
-    return res.status(400).json({ error: 'URL required' })
-  }
+  if (!url) return res.status(400).json({ error: 'URL required' })
 
   try {
-    const apiKey = process.env.GOOGLE_SAFE_BROWSING_API_KEY
+    const apiKey = process.env.VITE_GOOGLE_SAFE_BROWSING_API_KEY
+    if (!apiKey) {
+      return res.status(500).json({ error: 'Google API key not configured' })
+    }
 
     const response = await fetch(
       `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${apiKey}`,
@@ -37,8 +37,16 @@ export default async function handler(req, res) {
       }
     )
 
-    const data = await response.json()
+    if (!response.ok) {
+      const errorData = await response.json()
+      return res.status(response.status).json({ 
+        error: `Google Safe Browsing error: ${response.status}`,
+        details: errorData
+      })
+    }
 
+    const data = await response.json()
+    
     if (data.matches?.length > 0) {
       return res.json({
         riskLevel: 'danger',
@@ -53,16 +61,13 @@ export default async function handler(req, res) {
       riskLevel: 'safe',
       title: '✓ Seguro',
       emoji: '✓',
-      explanation: 'Este enlace parece legítimo.',
-      advice: 'Parece seguro, pero ten cuidado.'
+      explanation: 'Este enlace parece legítimo según Google Safe Browsing.',
+      advice: 'Parece seguro.'
     })
   } catch (error) {
-    return res.status(500).json({
-      riskLevel: 'warning',
-      title: '! Error',
-      emoji: '!',
-      explanation: 'Error al analizar.',
-      advice: 'Intenta de nuevo'
+    return res.status(500).json({ 
+      error: error.message,
+      type: error.constructor.name
     })
   }
 }
