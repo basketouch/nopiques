@@ -212,8 +212,8 @@ function App() {
       </main>
 
         {/* Terms Section */}
-        <section id="terminos" className="border-t border-gray-200 pt-12 scroll-mt-20 mb-16">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Términos y Condiciones</h2>
+        <section id="privacidad" className="border-t border-gray-200 pt-12 scroll-mt-20 mb-16">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Privacidad</h2>
 
           <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
             <div>

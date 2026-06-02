@@ -31,10 +31,10 @@ export function Footer() {
             </a>
             <span>•</span>
             <a
-              href="#terminos"
+              href="#privacidad"
               className="hover:text-gray-900 transition"
             >
-              términos
+              privacidad
             </a>
           </div>
         </div>
