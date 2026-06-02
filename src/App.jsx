@@ -21,13 +21,21 @@ function App() {
       {/* Main Content */}
       <main className="flex-grow max-w-5xl mx-auto w-full px-6 py-12">
         {/* Form Section */}
-        <div className="mb-16">
+        <div className="mb-12">
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-900 mb-4">
               ¿Qué quieres verificar?
             </label>
           </div>
           <AnalyzerForm />
+        </div>
+
+        {/* Privacy Banner - Prominent */}
+        <div className="mb-16 p-6 bg-gray-50 border border-gray-200 rounded">
+          <h3 className="text-sm font-semibold text-gray-900 mb-2">Análisis privado y seguro</h3>
+          <p className="text-sm text-gray-600">
+            Tu información no se guarda. El análisis se realiza de forma segura y todos los datos se eliminan inmediatamente después. Nada se registra ni se comparte.
+          </p>
         </div>
 
         {/* How it works */}
@@ -53,14 +61,6 @@ function App() {
               Alto riesgo. Probablemente sea una estafa. No continúes.
             </p>
           </div>
-        </section>
-
-        {/* Privacy */}
-        <section className="mt-16 pt-12 border-t border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Privacidad</h2>
-          <p className="text-gray-600 text-sm max-w-2xl">
-            Tu información no se guarda. El análisis se realiza de forma segura y todos los datos se eliminan inmediatamente después. Nada se registra ni se comparte.
-          </p>
         </section>
       </main>
 
