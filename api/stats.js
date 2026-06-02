@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   // Si todavía no se ha creado la base de datos, devolvemos null:
   // el frontend hará un conteo local de respaldo y nada se rompe.
   if (!url || !token) {
-    return res.json({ count: null })
+    return res.json({ count: null, _debug: { hasUrl: !!url, hasToken: !!token } })
   }
 
   try {
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     const data = await r.json()
     const count = Number(data.result) || 0
     return res.json({ count })
-  } catch {
-    return res.json({ count: null })
+  } catch (e) {
+    return res.json({ count: null, _debug: { hasUrl: !!url, hasToken: !!token, err: String(e) } })
   }
 }
