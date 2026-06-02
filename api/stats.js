@@ -11,8 +11,9 @@ export default async function handler(req, res) {
     return res.status(200).end()
   }
 
-  const url = process.env.KV_REST_API_URL
-  const token = process.env.KV_REST_API_TOKEN
+  // Aceptamos los dos nombres que Vercel/Upstash pueden usar
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN
 
   // Si todavía no se ha creado la base de datos, devolvemos null:
   // el frontend hará un conteo local de respaldo y nada se rompe.
