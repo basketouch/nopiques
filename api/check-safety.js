@@ -1,9 +1,5 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 
-const anthropic = new Anthropic({
-  apiKey: process.env.VITE_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY,
-});
-
 const GOOGLE_API_KEY = process.env.VITE_GOOGLE_SAFE_BROWSING_API_KEY || process.env.GOOGLE_SAFE_BROWSING_API_KEY;
 
 async function checkGoogleSafeBrowsing(url) {
@@ -56,6 +52,13 @@ async function getWhoisInfo(url) {
 }
 
 async function analyzeWithClaude(technicalData) {
+  const apiKey = process.env.VITE_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    throw new Error('ANTHROPIC_API_KEY not configured');
+  }
+
+  const anthropic = new Anthropic({ apiKey });
+
   const prompt = `
 Eres un asistente amigable que ayuda a personas a detectar estafas. Un usuario te envía datos técnicos sobre una URL o mensaje.
 
@@ -86,7 +89,7 @@ Responde en JSON:
 `;
 
   const message = await anthropic.messages.create({
-    model: 'claude-3-5-haiku-20241022',
+    model: 'claude-opus-4-1',
     max_tokens: 300,
     messages: [{ role: 'user', content: prompt }],
   });

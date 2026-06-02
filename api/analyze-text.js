@@ -1,9 +1,5 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 
-const anthropic = new Anthropic({
-  apiKey: process.env.VITE_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY,
-});
-
 function detectRedFlags(text) {
   const redFlags = {
     urgency: /urgente|ahora|inmediato|rápido|no esperes|pronto|hoy/gi,
@@ -23,6 +19,13 @@ function detectRedFlags(text) {
 }
 
 async function analyzeWithClaude(text, detectedFlags) {
+  const apiKey = process.env.VITE_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    throw new Error('ANTHROPIC_API_KEY not configured');
+  }
+
+  const anthropic = new Anthropic({ apiKey });
+
   const prompt = `
 Eres un asistente amigable que ayuda a detectar estafas por SMS, email o mensajes.
 
@@ -56,7 +59,7 @@ Responde en JSON:
 `;
 
   const message = await anthropic.messages.create({
-    model: 'claude-3-5-haiku-20241022',
+    model: 'claude-opus-4-1',
     max_tokens: 300,
     messages: [{ role: 'user', content: prompt }],
   });
