@@ -2,10 +2,10 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   
   try {
-    const apiKey = process.env.CLAUDE_API_KEY
+    const apiKey = process.env.ANTHROPIC_API_KEY
     
     if (!apiKey) {
-      return res.json({ error: 'No CLAUDE_API_KEY found' })
+      return res.json({ error: 'No ANTHROPIC_API_KEY found' })
     }
 
     console.log('API Key exists:', apiKey.substring(0, 10) + '...')

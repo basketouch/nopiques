@@ -3,7 +3,7 @@ export default async function handler(req, res) {
   
   try {
     const apiKey = process.env.GOOGLE_SAFE_BROWSING_API_KEY
-    const claudeKey = process.env.CLAUDE_API_KEY
+    const claudeKey = process.env.ANTHROPIC_API_KEY
     
     return res.json({
       status: 'ok',
