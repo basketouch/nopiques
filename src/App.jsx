@@ -48,7 +48,7 @@ function App() {
         </section>
 
         {/* Tips Section */}
-        <section id="consejos" className="border-t border-gray-200 pt-12 scroll-mt-20">
+        <section id="consejos" className="border-t border-gray-200 pt-12 scroll-mt-20 -mx-6 px-6 py-12 bg-gray-50">
           <h2 className="text-xl font-semibold text-gray-900 mb-8">Consejos para evitar estafas</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
