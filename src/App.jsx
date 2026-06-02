@@ -5,38 +5,31 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { PrivacyPage } from './pages/PrivacyPage'
 
-function App() {
-  const [verifications, setVerifications] = useState(0)
-  const [openFAQ, setOpenFAQ] = useState(null)
-
-  const faqItems = [
-    {
-      question: '¿Es gratis?',
-      answer: 'Sí, completamente gratis. NoPiques es una herramienta pública para ayudar a detectar estafas sin coste alguno.'
-    },
-    {
-      question: '¿Guarda mi información?',
-      answer: 'No. Tu información se elimina inmediatamente después del análisis. No guardamos historiales, datos personales ni enlaces que verificas.'
-    },
-    {
-      question: '¿Por qué debería confiar en NoPiques?',
-      answer: 'Usamos Google Safe Browsing (la misma tecnología que usa Google Chrome) más análisis inteligente. Está creado por una persona real (Jorge Lorenzo) que quiere ayudar, no una empresa que vende datos.'
-    },
-    {
-      question: '¿Qué pasa si me equivoco?',
-      answer: 'Si ves un error, puedes contactar a jorge@insidelife.club. Aunque en la mayoría de casos, si NoPiques dice que es peligroso, es mejor no hacer clic.'
-    },
-    {
-      question: '¿Funciona en todos los dispositivos?',
-      answer: 'Sí. NoPiques funciona en cualquier dispositivo con navegador: teléfono, tablet, computadora. No necesita instalar nada.'
-    }
-  ]
-
-  const handleVerification = () => {
-    setVerifications(prev => prev + 1)
+const faqItems = [
+  {
+    question: '¿Es gratis?',
+    answer: 'Sí, completamente gratis. NoPiques es una herramienta pública para ayudar a detectar estafas sin coste alguno.'
+  },
+  {
+    question: '¿Guarda mi información?',
+    answer: 'No. Tu información se elimina inmediatamente después del análisis. No guardamos historiales, datos personales ni enlaces que verificas.'
+  },
+  {
+    question: '¿Por qué debería confiar en NoPiques?',
+    answer: 'Usamos Google Safe Browsing (la misma tecnología que usa Google Chrome) más análisis inteligente. Está creado por una persona real (Jorge Lorenzo) que quiere ayudar, no una empresa que vende datos.'
+  },
+  {
+    question: '¿Qué pasa si me equivoco?',
+    answer: 'Si ves un error, puedes contactar a jorge@insidelife.club. Aunque en la mayoría de casos, si NoPiques dice que es peligroso, es mejor no hacer clic.'
+  },
+  {
+    question: '¿Funciona en todos los dispositivos?',
+    answer: 'Sí. NoPiques funciona en cualquier dispositivo con navegador: teléfono, tablet, computadora. No necesita instalar nada.'
   }
+]
 
-  const LandingPage = () => (
+function LandingPage({ verifications, openFAQ, setOpenFAQ, onVerification }) {
+  return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
 
@@ -47,7 +40,7 @@ function App() {
           <label className="block text-sm font-medium text-gray-900 mb-4">
             ¿Qué quieres verificar?
           </label>
-          <AnalyzerForm onVerification={handleVerification} />
+          <AnalyzerForm onVerification={onVerification} />
         </div>
 
         {/* Privacy Notice - Minimal */}
@@ -217,10 +210,29 @@ function App() {
       <Footer />
     </div>
   )
+}
+
+function App() {
+  const [verifications, setVerifications] = useState(0)
+  const [openFAQ, setOpenFAQ] = useState(null)
+
+  const handleVerification = () => {
+    setVerifications(prev => prev + 1)
+  }
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route
+        path="/"
+        element={
+          <LandingPage
+            verifications={verifications}
+            openFAQ={openFAQ}
+            setOpenFAQ={setOpenFAQ}
+            onVerification={handleVerification}
+          />
+        }
+      />
       <Route path="/privacidad" element={<PrivacyPage />} />
     </Routes>
   )
