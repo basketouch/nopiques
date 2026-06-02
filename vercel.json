@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "env": {
+    "ANTHROPIC_API_KEY": "@anthropic_api_key",
+    "GOOGLE_SAFE_BROWSING_API_KEY": "@google_safe_browsing_api_key"
+  }
+}
