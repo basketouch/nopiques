@@ -4,7 +4,7 @@ export function Footer() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-8">
           <p className="text-sm text-gray-600 mb-4">
-            creado por <strong className="text-gray-900">jorge lorenzo</strong>
+            creado por <strong className="text-gray-900">Jorge Lorenzo</strong>
           </p>
           <div className="flex justify-center gap-4 text-xs text-gray-500 mb-4">
             <a
